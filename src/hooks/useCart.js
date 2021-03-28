@@ -7,6 +7,7 @@ export const useCart = () => {
     const cart = cartItemsString ? JSON.parse(cartItemsString) : [];
     setCartItems(cart);
   }, []);
+
   const addCartItem = (product, quantity) => {
     const matchingCartItem = cartItems.find((cartItem) => cartItem.product.id === product.id);
     if (matchingCartItem) {
@@ -14,21 +15,23 @@ export const useCart = () => {
     } else {
       cartItems.push({ product, quantity });
     }
-    setCartItems(cartItems);
+    setCartItems([...cartItems]);
     window.localStorage.setItem('cartItems', JSON.stringify(cartItems));
   };
+
   const removeCartItem = (productId) => {
     const newCartItems = cartItems.filter((cartItem) => cartItem.product.id !== productId);
     setCartItems(newCartItems);
     window.localStorage.setItem('cartItems', JSON.stringify(newCartItems));
   };
+
   const updateQuantity = (productId, quantity) => {
     const matchingCartItem = cartItems.find((cartItem) => cartItem.product.id === productId);
     if (!matchingCartItem) {
       return;
     }
     matchingCartItem.quantity = quantity;
-    setCartItems(cartItems);
+    setCartItems([...cartItems]);
     window.localStorage.setItem('cartItems', JSON.stringify(cartItems));
   };
   return { cartItems, addCartItem, removeCartItem, updateQuantity };
