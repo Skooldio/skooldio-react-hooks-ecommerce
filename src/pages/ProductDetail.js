@@ -10,6 +10,8 @@ import { useParams } from 'react-router-dom';
 import { numberWithCommas } from '../utils';
 import { products } from '../data';
 
+import useAPI from '../hooks/useAPI';
+
 const Container = styled(BaseContainer)`
   padding-top: 78px;
   padding-bottom: 78px;
@@ -64,17 +66,7 @@ const data = products[0];
  */
 export const ProductDetail = () => {
   const { productId } = useParams();
-  const [data, setProduct] = useState(null);
-  const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    setLoading(true);
-    fetch('https://us-central1-skooldio-react-hooks.cloudfunctions.net/products/' + productId)
-      .then((resp) => resp.json())
-      .then((data) => {
-        setProduct(data);
-        setLoading(false);
-      });
-  }, []);
+  const { data, loading } = useAPI('/products/' + productId);
   if (loading || !data) return <div>Loading</div>;
   return (
     <Container>
