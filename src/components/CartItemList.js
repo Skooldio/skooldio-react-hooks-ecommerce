@@ -28,7 +28,8 @@ const SummaryTableCell = styled.td`
 /**
  * Below is the main CardItemList component.
  */
-export const CartItemList = ({ data }) => {
+export const CartItemList = ({ data, updateQuantity, removeCartItem }) => {
+  const totalPrice = data.reduce((prev, cur) => prev + cur.quantity * cur.product.price, 0);
   return (
     <Table>
       <thead>
@@ -40,13 +41,18 @@ export const CartItemList = ({ data }) => {
       </thead>
       <tbody>
         {data.map((cartItem) => (
-          <CartItem key={cartItem.id} data={cartItem} />
+          <CartItem
+            key={cartItem.id}
+            {...cartItem}
+            updateQuantity={updateQuantity}
+            removeCartItem={removeCartItem}
+          />
         ))}
 
         <tr>
           <td></td>
           <SummaryTableCell>Total</SummaryTableCell>
-          <SummaryTableCell>฿{numberWithCommas(100000)}</SummaryTableCell>
+          <SummaryTableCell>฿{numberWithCommas(totalPrice)}</SummaryTableCell>
         </tr>
       </tbody>
     </Table>
