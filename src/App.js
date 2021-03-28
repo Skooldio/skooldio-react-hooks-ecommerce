@@ -5,10 +5,11 @@ import ProductDetail from './pages/ProductDetail';
 import Cart from './pages/Cart';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import { CartProvider } from './contexts/cart';
 
 export const App = () => {
   return (
-    <>
+    <CartProvider>
       <Router>
         <Navbar />
 
@@ -26,7 +27,7 @@ export const App = () => {
 
         <Footer />
       </Router>
-    </>
+    </CartProvider>
   );
 };
 
