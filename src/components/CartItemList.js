@@ -40,7 +40,7 @@ export const CartItemList = ({ data }) => {
       </thead>
       <tbody>
         {data.map((cartItem) => (
-          <CartItem data={cartItem} />
+          <CartItem key={cartItem.id} data={cartItem} />
         ))}
 
         <tr>

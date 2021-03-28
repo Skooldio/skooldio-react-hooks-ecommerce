@@ -96,11 +96,11 @@ CartIcon.propTypes = {
 export const Navbar = () => (
   <Wrapper>
     <Container>
-      <Link component={'a'} to={'/'}>
+      <Link to={'/'}>
         <NavLogo src={'/assets/images/logo.png'} alt={'logo'} />
       </Link>
       <SearchInput />
-      <Link component={'a'} to={'/my-cart'}>
+      <Link to={'/my-cart'}>
         <CartIcon active={false} />
       </Link>
     </Container>

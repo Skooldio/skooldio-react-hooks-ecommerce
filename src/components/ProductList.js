@@ -26,7 +26,7 @@ const Container = styled(BaseContainer)`
 export const ProductList = ({ data = [] }) => (
   <Container>
     {data.map((product) => (
-      <ProductItem data={product} />
+      <ProductItem key={product.id} data={product} />
     ))}
   </Container>
 );
