@@ -36,8 +36,17 @@ export const CartProvider = ({ children }) => {
     setCartItems([...cartItems]);
     window.localStorage.setItem('cartItems', JSON.stringify(cartItems));
   };
+  const validForCheckout = cartItems.every(
+    (cartItem) => cartItem.quantity % 1 === 0 && cartItem.quantity > 0
+  );
+  const checkout = () => {
+    setCartItems([]);
+    window.localStorage.setItem('cartItems', JSON.stringify([]));
+  };
   return (
-    <CartContext.Provider value={{ cartItems, addCartItem, removeCartItem, updateQuantity }}>
+    <CartContext.Provider
+      value={{ cartItems, addCartItem, removeCartItem, updateQuantity, validForCheckout, checkout }}
+    >
       {children}
     </CartContext.Provider>
   );

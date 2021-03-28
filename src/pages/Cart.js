@@ -30,7 +30,7 @@ const CheckOutButton = styled(Button)`
  * Below is the main Cart component.
  */
 export const Cart = () => {
-  const { cartItems, removeCartItem, updateQuantity } = useCart();
+  const { cartItems, removeCartItem, updateQuantity, checkout, validForCheckout } = useCart();
   return (
     <Container>
       <Title>My Cart</Title>
@@ -39,7 +39,16 @@ export const Cart = () => {
         updateQuantity={updateQuantity}
         removeCartItem={removeCartItem}
       />
-      <CheckOutButton>Check out</CheckOutButton>
+      <CheckOutButton
+        disabled={!validForCheckout}
+        onClick={() => {
+          if (window.confirm('ต้องการดำเนินการต่อ?')) {
+            checkout();
+          }
+        }}
+      >
+        Check out
+      </CheckOutButton>
     </Container>
   );
 };
