@@ -4,6 +4,8 @@ import BaseContainer from '../components/Container';
 import Button from '../components/Button';
 import Input from '../components/Input';
 
+import { useParams } from 'react-router-dom';
+
 import { numberWithCommas } from '../utils';
 import { products } from '../data';
 
@@ -59,20 +61,24 @@ const data = products[0];
 /**
  * Below is the main ProductDetail component.
  */
-export const ProductDetail = () => (
-  <Container>
-    <ProductImage src={data.imageUrl} alt={`${data.name}`} />
-    <ProductInfo>
-      <Subtitle>
-        <span>{data.category}</span>
-        <span>฿{numberWithCommas(data.price)}</span>
-      </Subtitle>
-      <Title>{data.name}</Title>
-      <Description>{data.description}</Description>
-      <Input style={{ marginBottom: '40px' }} type={'number'} label={'Quantity'} />
-      <Button>Add to Cart</Button>
-    </ProductInfo>
-  </Container>
-);
+export const ProductDetail = () => {
+  const { productId } = useParams();
+  console.log('productId: ', productId);
+  return (
+    <Container>
+      <ProductImage src={data.imageUrl} alt={`${data.name}`} />
+      <ProductInfo>
+        <Subtitle>
+          <span>{data.category}</span>
+          <span>฿{numberWithCommas(data.price)}</span>
+        </Subtitle>
+        <Title>{data.name}</Title>
+        <Description>{data.description}</Description>
+        <Input style={{ marginBottom: '40px' }} type={'number'} label={'Quantity'} />
+        <Button>Add to Cart</Button>
+      </ProductInfo>
+    </Container>
+  );
+};
 
 export default ProductDetail;
