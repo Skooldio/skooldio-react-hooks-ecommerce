@@ -1,17 +1,31 @@
-import Home from "./pages/Home";
-import ProductDetail from "./pages/ProductDetail";
-import Cart from "./pages/Cart";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import Home from './pages/Home';
+import ProductDetail from './pages/ProductDetail';
+import Cart from './pages/Cart';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 export const App = () => {
   return (
     <>
-      <Navbar />
-      {true && <Home></Home>}
-      {false && <Cart></Cart>}
-      {false && <ProductDetail></ProductDetail>}
-      <Footer />
+      <Router>
+        <Navbar />
+
+        <Switch>
+          <Route path="/products/:productId" exact>
+            <ProductDetail />
+          </Route>
+          <Route path="/my-cart" exact>
+            <Cart />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+
+        <Footer />
+      </Router>
     </>
   );
 };
