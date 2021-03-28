@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import BaseContainer from '../components/Container';
@@ -63,7 +64,18 @@ const data = products[0];
  */
 export const ProductDetail = () => {
   const { productId } = useParams();
-  console.log('productId: ', productId);
+  const [data, setProduct] = useState(null);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    fetch('https://us-central1-skooldio-react-hooks.cloudfunctions.net/products/' + productId)
+      .then((resp) => resp.json())
+      .then((data) => {
+        setProduct(data);
+        setLoading(false);
+      });
+  }, []);
+  if (loading || !data) return <div>Loading</div>;
   return (
     <Container>
       <ProductImage src={data.imageUrl} alt={`${data.name}`} />
