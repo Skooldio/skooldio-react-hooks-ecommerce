@@ -26,12 +26,12 @@ const InputComponent = styled.input`
 `;
 
 /**
- * Below is the main Input component.
+ * The main Input component.
  */
-export const Input = ({ type, label, ...restProps }) => (
-  <div {...restProps}>
+export const Input = ({ type, label, className, ...restProps }) => (
+  <div className={className}>
     {label && <Label>{label}</Label>}
-    <InputComponent type={type} />
+    <InputComponent type={type} {...restProps} />
   </div>
 );
 
